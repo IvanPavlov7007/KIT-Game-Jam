@@ -7,8 +7,8 @@ public class AnimalCollision : MonoBehaviour
     FlockingMember thisFlockingMember { get { if (_tA == null) _tA = GetComponentInParent<FlockingMember>(); return _tA; } }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var otherAI = collision.gameObject.GetComponentInParent<FlockingMember>();
+        var otherFlockingMember = collision.gameObject.GetComponentInParent<FlockingMember>();
 
-        thisFlockingMember.CollidedWithAnother(otherAI);
+        thisFlockingMember.Mind.reportCollision(otherFlockingMember);
     }
 }

@@ -135,16 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 442327643552909613}
-  stats:
-    attack: 1
-    additionalAttack: 0
-    view: 1
-    additionalView: 0
-    speed: 1
-    additionalSpeed: 1
-    maxHealth: 1
-    health: 1
-    additionalHealth: 0
+  flockingMember: {fileID: 2893180988989423253}
 --- !u!50 &442327643552909613
 Rigidbody2D:
   serializedVersion: 4
@@ -219,14 +210,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d34bf5117b4266f47bfa6a3c4c9d9faf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalMovement: {fileID: 2943846457817456759}
+  animalBase: {fileID: 2943846457817456759}
   flockPushVelocity: 0
-  aiTickProbability: 0.3
+  aiTickProbability: 1
   perceptionDistance: 1
   separationDistance: 0.3
   separatingDistanceToVelocityCompensation: 0.3
   goalVelocityAmount: 0.5
   flock: {fileID: 0}
+  stats:
+    attack: 1
+    additionalAttack: 0
+    view: 1
+    additionalView: 0
+    speed: 1
+    additionalSpeed: 1
+    maxHealth: 2
+    health: 2
+    additionalHealth: 0
 --- !u!114 &8773292194133295321
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,22 +2,22 @@
 using UnityEngine;
 
 [System.Serializable]
-public struct StatsEntity
+public struct StatsCollection
 {
-    public float attack;
-    public float additionalAttack;
+    public int attack;
+    public int additionalAttack;
 
-    public float view;
-    public float additionalView;
+    public int view;
+    public int additionalView;
 
-    public float speed;
-    public float additionalSpeed;
+    public int speed;
+    public int additionalSpeed;
 
-    public float maxHealth;
-    public float health;
-    public float additionalHealth;
+    public int maxHealth;
+    public int health;
+    public int additionalHealth;
 
-    public static StatsEntity operator + (StatsEntity a, StatsEntity b)
+    public static StatsCollection operator + (StatsCollection a, StatsCollection b)
     {
         a.additionalAttack += b.additionalAttack;
         a.additionalSpeed += b.additionalSpeed;
@@ -28,7 +28,7 @@ public struct StatsEntity
         return a;
     }
 
-    public static StatsEntity operator -(StatsEntity stats)
+    public static StatsCollection operator -(StatsCollection stats)
     {
         stats.additionalAttack = -stats.additionalAttack;
         stats.additionalSpeed -= stats.additionalSpeed;

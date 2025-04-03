@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
 using System;
-public class Mind : MonoBehaviour
+using System.Collections.Generic;
+using System.Linq;
+
+public abstract class Mind : MonoBehaviour
 {
-    [SerializeField]
-    Flock flock;
+    //implement when to callback decision!!
+
+    public virtual Flock flock { get; protected set; }
     public Process process { get; private set; }
-    public StatsEntity statsEntity { get; protected set; }
 
     protected Action<Mind, ProcessDecision> decisionCallback;
     public virtual void reportCollision(FlockingMember other)
@@ -14,7 +17,7 @@ public class Mind : MonoBehaviour
         if (process != null)
             return;
 
-        Mind otherMind = other.;
+        Mind otherMind = other.Mind;
         if (otherMind == null)
             throw new UnityException("Animal without mind: " + other.name);
         if (otherMind == this)
@@ -29,7 +32,6 @@ public class Mind : MonoBehaviour
     {
         this.process = process;
         decisionCallback = callBack;
-        //TODO call callback!!
     }
 
     public virtual void StopProcess()
@@ -38,25 +40,74 @@ public class Mind : MonoBehaviour
         decisionCallback = null;
     }
 
-    public virtual FightResult SufferFight() {
+    public virtual void killFlock()
+    {
+        flock.kill();
     }
+
+    public virtual FightResult SufferFight(Mind enemy) 
+    {
+        int damage = enemy.getStats().attack;
+        bool shouldBeDestroyed = false;
+
+        var thisStats = getStats();
+        var otherStats = enemy.getStats();
+
+        thisStats.health -= otherStats.attack + otherStats.additionalAttack;
+        shouldBeDestroyed = thisStats.health <= 0;
+
+        return new FightResult(this, shouldBeDestroyed, applyDamage, damage);
+    }
+
+    public virtual void applyDamage(FightResult result)
+    {
+        flock.DistributeDamage(result.damage);
+
+    }
+
+    
+
+    public virtual StatsCollection getStats()
+    {
+        var stats = flock.stats;
+        if (flock.animalsInFlock.Count == 1)
+        {
+            stats = flock.animalsInFlock[0].stats;
+        }
+        return stats;
+    }
+
+    public virtual void initializeMind(FlockingMember flockingMember)
+    {
+        flock = gameObject.AddComponent<Flock>();
+        flock.initializeFlock(flockingMember);
+    }
+
+
 
     public void growFlock(Flock flock)
     {
+        flock.addFlockMembers(flock.animalsInFlock);
+    }
 
+    public virtual void DestroyMind()
+    {
+        Destroy(gameObject);
     }
 }
 
 public struct FightResult
 {
-    Mind mind;
-    bool shouldBeDestroyed; 
-    System.Action<Mind> applySufferChanges;
+    public Mind mind;
+    public bool shouldBeDestroyed;
+    public System.Action<FightResult> applySufferChanges;
+    public int damage;
 
-    public FightResult(Mind mind, bool shouldBeDestroyed, Action<Mind> applySufferChanges)
+    public FightResult(Mind mind, bool shouldBeDestroyed, Action<FightResult> applySufferChanges, int damage)
     {
         this.mind = mind;
         this.shouldBeDestroyed = shouldBeDestroyed;
         this.applySufferChanges = applySufferChanges;
+        this.damage = damage;
     }
 }

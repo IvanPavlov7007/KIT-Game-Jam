@@ -4,12 +4,13 @@ using Pixelplacement;
 public class GameManager : Singleton<GameManager>
 {
     public PlayerController playerController;
+    public PlayerMind playerMind;
     public AnimalBase firstAnimal;
     public Rect spawnRect = new Rect(-100f, -100f, 200f, 200f);
+
     void Start()
     {
-        playerController.currentTarget = firstAnimal;
-
+        
         SpawnManager.Instance.SpawnAnimals(spawnRect);
     }
 
@@ -27,65 +28,88 @@ public class GameManager : Singleton<GameManager>
         Destroy(process.gameObject);
     }
 
+    Mind selectSupreriorMind(Mind mindA, Mind mindB)
+    {
+        if (mindA == playerMind)
+            return mindA;
+        if (mindB == playerMind)
+            return mindB;
+
+        if (mindA.flock.animalsInFlock.Count >= mindB.flock.animalsInFlock.Count)
+            return mindA;
+        return mindB;
+    }
+
     public void resolveAlliance(Process process, Mind mindA, Mind mindB)
     {
-        Mind mainMind = mindA;
-        /* TODO
-         * if player
-         * mainMind =
-         */
 
+        Mind supreriorMind = selectSupreriorMind(mindA, mindB);
+        Mind inferiorMind = supreriorMind == mindA ? mindB : mindA;
+        Flock toTransfer = inferiorMind.flock;
 
-         /*
-          * mindA add animals from mindB
-          * 
-          * Animals[] animals from mindB.flock 
-          * 
-          * mindA: recalculateStats and controls
-          * 
-          * flockB
-          * mindB destory 
-          * 
-          * 
-          * 
-          * */
+        supreriorMind.growFlock(toTransfer);
+        inferiorMind.DestroyMind();
+
+        supreriorMind.StopProcess();
+
+        Destroy(process.gameObject);
     }
 
     public void resolveFight(Process process, FightResult result1, FightResult result2)
     {
-
-    }    
-
-    public void buildFlock(params FlockingMember[] animalAIs)
-    {
-        var flock = new GameObject("flock").AddComponent<Flock>();
-        flock.createFlock(animalAIs);
-
-        Vector3 sumPos = Vector3.zero;
-
-        foreach (var ai in animalAIs)
+        if (result1.mind == playerMind && result1.shouldBeDestroyed)
         {
-            if (playersControl(ai))
-            {
-                playerController.currentTarget = flock;
-            }
-            sumPos += ai.transform.position;
+            GameOver();
         }
-        flock.assignInitialPosition(sumPos / animalAIs.Length);
+        if (result2.mind == playerMind && result2.shouldBeDestroyed)
+        {
+            GameOver();
+        }
+
+        processFightResult(result1);
+        processFightResult(result2);
+        Destroy(process.gameObject);
+
     }
 
-    private bool playersControl(FlockingMember ai)
+    private void processFightResult(FightResult result)
     {
-        return playerController.currentTarget == ai.AnimalBase;
+        if (result.shouldBeDestroyed)
+        {
+            result.mind.killFlock();
+            result.mind.DestroyMind();
+        }
+        else
+        {
+            result.applySufferChanges(result);
+        }
+    }
+    public Mind provideMind(FlockingMember flockingMember)
+    {
+        if(flockingMember.AnimalBase == firstAnimal)
+        {
+            playerMind.initializeMind(flockingMember);
+            return playerMind;
+        }
+
+        GameObject go = new GameObject(flockingMember.gameObject.name + "'s initial mind");
+        var mind = go.AddComponent<GoodAIMind>();
+        mind.initializeMind(flockingMember);
+        return mind;
     }
 
-    private bool playersControl(BaseMovement movement)
+    private void GameOver()
     {
-        return playerController.currentTarget == movement;
+
     }
 
-    public Mind provideAnyMind(FlockingMember flockingMember)
+    public void StopTime()
     {
+        Time.timeScale = 0f;
+    }
 
+    public void ResumeTime()
+    {
+        Time.timeScale = 1f;
     }
 }

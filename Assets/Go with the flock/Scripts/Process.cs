@@ -77,8 +77,8 @@ public class Process : MonoBehaviour
     {
         //TODO pull minds, start particles
         yield return new WaitForEndOfFrame();
-        var resultA = mindA.SufferFight();
-        var resultB = mindB.SufferFight();
+        var resultA = mindA.SufferFight(mindB);
+        var resultB = mindB.SufferFight(mindA);
         GameManager.Instance.resolveFight(this, resultA, resultB);
     }
 }

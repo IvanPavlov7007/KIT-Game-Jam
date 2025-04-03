@@ -30,4 +30,9 @@ public class AnimalBase : MonoBehaviour, BaseMovement
         rb.velocity = TargetVelocity * overallSpeed;
     }
 
+    public virtual void Kill()
+    {
+        Destroy(gameObject);
+    }
+
 }
