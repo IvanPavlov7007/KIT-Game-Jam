@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class AnimalCollision : MonoBehaviour
 {
-    AnimalAI _tA;
-    AnimalAI thisAI { get { if (_tA == null) _tA = GetComponentInParent<AnimalAI>(); return _tA; } }
+    FlockingMember _tA;
+    FlockingMember thisFlockingMember { get { if (_tA == null) _tA = GetComponentInParent<FlockingMember>(); return _tA; } }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var otherAI = collision.gameObject.GetComponentInParent<AnimalAI>();
+        var otherAI = collision.gameObject.GetComponentInParent<FlockingMember>();
 
-        thisAI.CollidedWithAnother(otherAI);
+        thisFlockingMember.CollidedWithAnother(otherAI);
     }
 }

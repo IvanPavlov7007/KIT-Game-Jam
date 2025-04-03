@@ -9,41 +9,30 @@ public class Flock : MonoBehaviour, BaseMovement
     public Vector2 position { get; private set; }
     public Vector2 velocity { get; private set; }
 
-    public List<AnimalAI> animalsInFlock { get; private set; } = new List<AnimalAI>();
+    public StatsEntity stats;
+
+    public List<FlockingMember> animalsInFlock { get; private set; } = new List<FlockingMember>();
 
     protected virtual void FixedUpdate()
     {
         position = velocity * Time.fixedDeltaTime;
     }
 
-    public virtual void assignInitialPosition(Vector2 pos)
-    {
-        position = pos;
-    }
 
-    public virtual void createFlock(ICollection<AnimalAI> animalAIs)
+    public void addFlockMembers(IEnumerable<FlockingMember> members)
     {
-        animalsInFlock.AddRange(animalAIs);
-        foreach (var an in animalAIs)
+        foreach(var memb in members)
         {
-            an.flock = this;
+            addStats(memb.stats);
+            memb.flock = this;
         }
+        animalsInFlock.AddRange(members);
     }
 
-    void addFlockMember(AnimalAI ai)
+    void addStats(StatsEntity additional)
     {
-        ai.flock = this;
-        animalsInFlock.Add(ai);
-    }
+        stats += additional;
 
-    //Be careful, since collision is being called twice from both sides!
-    public void handleCollision(AnimalAI flocksMember, AnimalAI another)
-    {
-        if(another.flock == null)
-        {
-            addFlockMember(another);
-        }
-        //TODO handle else, maybe thorugh Game Manager
     }
 
 }

@@ -135,7 +135,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8080516078496641291}
-  speed: 1
+  stats:
+    attack: 1
+    additionalAttack: 0
+    view: 1
+    additionalView: 1
+    speed: 1
+    additionalSpeed: 0
+    maxHealth: 1
+    health: 1
+    additionalHealth: 0
 --- !u!50 &8080516078496641291
 Rigidbody2D:
   serializedVersion: 4
@@ -195,7 +204,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.125}
+  m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
   m_Radius: 0.25
 --- !u!114 &-3725386242759671769

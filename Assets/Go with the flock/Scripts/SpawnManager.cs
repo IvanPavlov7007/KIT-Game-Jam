@@ -14,7 +14,6 @@ public class SpawnManager : Singleton<SpawnManager>
 
     Dictionary<Vector2, GameObject> createdObjects = new Dictionary<Vector2, GameObject>();
 
-    //TODO create stocks instead of animalsl
     public void SpawnAnimals(Rect rect)
     {
         if (rect == default)
