@@ -8,8 +8,8 @@ public class AnimalMovement : MonoBehaviour, BaseMovement
     public float speed = 1f;
 
     Vector2 direction;
-    public Vector2 Direction { get { return direction; } set { direction = value; } }
-
+    public virtual Vector2 Direction { get { return TargetVelocity.normalized; } set { direction = value.normalized; TargetVelocity = direction * speed; } }
+    public virtual Vector2 TargetVelocity { get; set; }
     protected void Start()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -17,7 +17,7 @@ public class AnimalMovement : MonoBehaviour, BaseMovement
 
     protected void FixedUpdate()
     {
-        rb.velocity = Direction * speed;
+        rb.velocity = TargetVelocity * speed;
     }
 
 }

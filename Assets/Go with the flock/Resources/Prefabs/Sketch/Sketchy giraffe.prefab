@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7287664412047012456}
   - component: {fileID: 8080516078496641291}
   - component: {fileID: -5524225119205438805}
+  - component: {fileID: -3725386242759671769}
+  - component: {fileID: 6667005562113424176}
   m_Layer: 0
   m_Name: Sketchy giraffe
   m_TagString: Untagged
@@ -111,6 +113,38 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.125}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &-3725386242759671769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715297152155616809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34bf5117b4266f47bfa6a3c4c9d9faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalMovement: {fileID: 7287664412047012456}
+  flockPushVelocity: 0
+  aiTickProbability: 0.3
+  perceptionDistance: 1
+  separationDistance: 0.3
+  separatingDistanceToVelocityCompensation: 0.3
+  goalVelocityAmount: 0.5
+  flock: {fileID: 0}
+--- !u!114 &6667005562113424176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715297152155616809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ee154e4b7fd4a49823819f5d419d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7975458324741978264
 GameObject:
   m_ObjectHideFlags: 0

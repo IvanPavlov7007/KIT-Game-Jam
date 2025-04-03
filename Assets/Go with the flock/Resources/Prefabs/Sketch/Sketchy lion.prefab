@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 9191940788679215472}
   - component: {fileID: 1303779786092711796}
   - component: {fileID: 4557781121451748589}
+  - component: {fileID: -2225529882119393011}
+  - component: {fileID: -4362233594487862745}
   m_Layer: 0
   m_Name: Sketchy lion
   m_TagString: Untagged
@@ -195,3 +197,34 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.125}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &-2225529882119393011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8138058744548623275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34bf5117b4266f47bfa6a3c4c9d9faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalMovement: {fileID: 9191940788679215472}
+  flockPushVelocity: 0
+  aiTickProbability: 0.3
+  perceptionDistance: 1
+  separationDistance: 0.3
+  separatingDistanceToVelocityCompensation: 0.3
+  flock: {fileID: 0}
+--- !u!114 &-4362233594487862745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8138058744548623275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ee154e4b7fd4a49823819f5d419d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

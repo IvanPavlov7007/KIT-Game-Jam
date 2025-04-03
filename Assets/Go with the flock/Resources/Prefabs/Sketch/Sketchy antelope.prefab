@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 2943846457817456759}
   - component: {fileID: 442327643552909613}
   - component: {fileID: -9072043886388140761}
+  - component: {fileID: 2893180988989423253}
+  - component: {fileID: 8773292194133295321}
   m_Layer: 0
   m_Name: Sketchy antelope
   m_TagString: Untagged
@@ -195,3 +197,34 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.125}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &2893180988989423253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7330148202559405081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34bf5117b4266f47bfa6a3c4c9d9faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animalMovement: {fileID: 2943846457817456759}
+  flockPushVelocity: 0
+  aiTickProbability: 0.3
+  perceptionDistance: 1
+  separationDistance: 0.3
+  separatingDistanceToVelocityCompensation: 0.3
+  flock: {fileID: 0}
+--- !u!114 &8773292194133295321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7330148202559405081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7ee154e4b7fd4a49823819f5d419d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
