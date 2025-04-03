@@ -11,6 +11,9 @@ public class Process : MonoBehaviour
 
     public void InitProcess(Mind mindA, Mind mindB)
     {
+        this.mindA = mindA;
+        this.mindB = mindB;
+
         mindA.StartProcess(this, decisionMet);
         mindB.StartProcess(this, decisionMet);
     }
@@ -25,7 +28,7 @@ public class Process : MonoBehaviour
         }
         if (mind == mindB)
         {
-            if (decisionA != null)
+            if (decisionB != null)
                 Debug.LogWarning(mindA.name + " has already decided and now switches decision");
             decisionB = decision;
         }

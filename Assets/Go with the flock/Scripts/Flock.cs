@@ -13,11 +13,12 @@ public class Flock : MonoBehaviour, BaseMovement
     public Vector2 velocity { get; private set; }
 
     public StatsCollection stats;
+
     public List<FlockingMember> animalsInFlock { get; private set; } = new List<FlockingMember>();
 
     protected virtual void FixedUpdate()
     {
-        position = velocity * Time.fixedDeltaTime;
+        position += velocity * Time.fixedDeltaTime;
     }
 
 

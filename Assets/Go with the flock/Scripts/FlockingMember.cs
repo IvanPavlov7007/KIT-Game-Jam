@@ -16,7 +16,7 @@ public class FlockingMember : MonoBehaviour
     public float goalVelocityAmount = 0.5f;
     [HideInInspector]
     public Flock flock;
-    public Mind Mind { get; protected set; }
+    public Mind Mind { get; set; }
 
     public StatsCollection stats = new StatsCollection
     {

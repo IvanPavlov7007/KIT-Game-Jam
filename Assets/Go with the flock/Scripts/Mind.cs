@@ -85,9 +85,13 @@ public abstract class Mind : MonoBehaviour
 
 
 
-    public void growFlock(Flock flock)
+    public void growFlock(Flock otherFlock)
     {
-        flock.addFlockMembers(flock.animalsInFlock);
+        this.flock.addFlockMembers(otherFlock.animalsInFlock);
+        foreach (var member in otherFlock.animalsInFlock)
+        {
+            member.Mind = this;
+        }
     }
 
     public virtual void DestroyMind()

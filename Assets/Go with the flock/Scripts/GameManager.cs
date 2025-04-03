@@ -89,6 +89,7 @@ public class GameManager : Singleton<GameManager>
         if(flockingMember.AnimalBase == firstAnimal)
         {
             playerMind.initializeMind(flockingMember);
+            playerController.currentTarget = playerMind;
             return playerMind;
         }
 
