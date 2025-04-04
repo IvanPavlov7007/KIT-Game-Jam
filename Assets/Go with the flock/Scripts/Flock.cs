@@ -17,7 +17,7 @@ public class Flock : MonoBehaviour, BaseMovement
 
     protected virtual void FixedUpdate()
     {
-        velocity = Direction.normalized * (stats.additionalSpeed + 1);
+        velocity = Direction.normalized * Balancing.Instance.adjustedSpeed(stats.additionalSpeed + 1);
         position += velocity * Time.fixedDeltaTime;
     }
 
@@ -104,6 +104,9 @@ public class Flock : MonoBehaviour, BaseMovement
     }
 
 }
+
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(Flock))]
 public class FlockEditor : Editor
 {
@@ -113,3 +116,4 @@ public class FlockEditor : Editor
         Handles.DrawWireCube(pos, Vector3.one * 0.5f);
     }
 }
+#endif
