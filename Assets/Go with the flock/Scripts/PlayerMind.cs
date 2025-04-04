@@ -7,6 +7,12 @@ public class PlayerMind : Mind, BaseMovement
     public Vector2 Direction { get => flock.Direction; 
         set => flock.Direction = value; }
 
+    public override void initializeMind(FlockingMember flockingMember)
+    {
+        base.initializeMind(flockingMember);
+        CameraController.Instance.selectTarget(flock);
+    }
+
     public override void StartProcess(Process process, Action<Mind, ProcessDecision> callBack)
     {
         base.StartProcess(process, callBack);

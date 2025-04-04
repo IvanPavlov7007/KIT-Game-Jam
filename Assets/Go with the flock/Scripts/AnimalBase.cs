@@ -17,7 +17,13 @@ public class AnimalBase : MonoBehaviour, BaseMovement
             TargetVelocity = direction * overallSpeed; } 
     }
 
-    public virtual float overallSpeed { get { return flockingMember.stats.speed + flockingMember.stats.additionalSpeed; } }
+    public virtual float overallSpeed { get { 
+
+        //if(flockingMember.flock.animalsInFlock.Count > 1)
+            return flockingMember.stats.speed + flockingMember.flock.stats.additionalSpeed;
+        //else
+        //    return flockingMember.stats.speed
+                } }
     public virtual Vector2 TargetVelocity { get; set; }
 
     protected void Start()

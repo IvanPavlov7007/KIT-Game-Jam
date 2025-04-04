@@ -3,12 +3,11 @@ using System.Collections;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEditor;
 
 public class Flock : MonoBehaviour, BaseMovement
 {
-    public Vector2 Direction { get { return velocity.normalized; } set { velocity = value.normalized * speed; } }
-    public float speed { get; private set; } = 1f;
-
+    public Vector2 Direction { get; set; }
     public Vector2 position { get; private set; }
     public Vector2 velocity { get; private set; }
 
@@ -18,6 +17,7 @@ public class Flock : MonoBehaviour, BaseMovement
 
     protected virtual void FixedUpdate()
     {
+        velocity = Direction.normalized * (stats.additionalSpeed + 1);
         position += velocity * Time.fixedDeltaTime;
     }
 
@@ -103,4 +103,13 @@ public class Flock : MonoBehaviour, BaseMovement
         member.AnimalBase.Kill();
     }
 
+}
+[CustomEditor(typeof(Flock))]
+public class FlockEditor : Editor
+{
+    private void OnSceneGUI()
+    {
+        Vector3 pos = (target as Flock).position;
+        Handles.DrawWireCube(pos, Vector3.one * 0.5f);
+    }
 }

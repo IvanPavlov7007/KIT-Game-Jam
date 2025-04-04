@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         
-        SpawnManager.Instance.SpawnAnimals(spawnRect);
+        //SpawnManager.Instance.SpawnAnimals(spawnRect);
     }
 
     public Process initNewProcess(Mind a, Mind b)
@@ -101,7 +101,7 @@ public class GameManager : Singleton<GameManager>
 
     private void GameOver()
     {
-
+        Debug.Log("Game over!");
     }
 
     public void StopTime()

@@ -47,7 +47,9 @@ public abstract class Mind : MonoBehaviour
 
     public virtual FightResult SufferFight(Mind enemy) 
     {
-        int damage = enemy.getStats().attack;
+        var enemyStats = enemy.getStats();
+
+        int damage = enemyStats.attack + enemyStats.additionalAttack;
         bool shouldBeDestroyed = false;
 
         var thisStats = getStats();
