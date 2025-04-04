@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Pixelplacement;
+using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public PlayerController playerController;
@@ -101,7 +102,7 @@ public class GameManager : Singleton<GameManager>
 
     private void GameOver()
     {
-        Debug.Log("Game over!");
+        SceneManager.LoadScene("GameOverEnding");
     }
 
     public void StopTime()

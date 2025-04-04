@@ -16,6 +16,14 @@ public class PlayerMind : Mind, BaseMovement
     public override void StartProcess(Process process, Action<Mind, ProcessDecision> callBack)
     {
         base.StartProcess(process, callBack);
+        if (!TutorialManager.Instance.showEncounterExplanation(ForceDecision))
+        {
+            ForceDecision();
+        }
+    }
+
+    private void ForceDecision()
+    {
         ClashManager.Instance.ShowDecision(this, process.mindA == this ? process.mindB : process.mindA);
         GameManager.Instance.StopTime();
     }

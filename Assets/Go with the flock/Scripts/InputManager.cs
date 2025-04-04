@@ -14,6 +14,7 @@ public class InputManager : Singleton<InputManager>
     public event System.Action onAccept;
     public event System.Action onDecline;
     public event System.Action onFullScreen;
+    public event System.Action onMousePressed;
 
     public void OnMove(InputValue inputValue)
     {
@@ -23,6 +24,8 @@ public class InputManager : Singleton<InputManager>
     public void OnClick(InputValue inputValue)
     {
         mousePressed = inputValue.isPressed;
+        if (mousePressed)
+            onMousePressed?.Invoke();
     }
     
     public void OnAccept(InputValue inputValue)

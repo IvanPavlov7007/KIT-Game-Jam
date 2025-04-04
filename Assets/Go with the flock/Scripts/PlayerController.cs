@@ -9,4 +9,10 @@ public class PlayerController : Singleton<PlayerController>
         if(currentTarget != null)
             currentTarget.Direction = InputManager.Instance.directInput;
     }
+
+    private void OnDisable()
+    {
+        if (currentTarget != null)
+            currentTarget.Direction = Vector2.zero;
+    }
 }
